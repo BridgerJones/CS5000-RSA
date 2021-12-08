@@ -69,7 +69,16 @@ def mod_exp(a, b, n):
     this function computes a^b mod n.
     """
     ### your code here
-    pass
+    c = 0
+    d = 1
+
+    for i in bin(b)[2:]:
+        c = 2 * c
+        d = (d * d) % n
+        if i == '1':
+            c = c + 1
+            d = (d * a) % n
+    return d
 
 ### Assign 12, subproblem 1.4
 def euler_phi(n):
