@@ -26,7 +26,7 @@ def xgcd(a,b):
         x, prevx = prevx - q * x, x
         y, prevy = prevy - q * y, y
         aa, bb = bb, aa % bb
-    return [aa, prevx, prevy]
+    return aa, prevx, prevy
 
 ### Assign 12, subproblem 1.2
 def mult_inv(a, n):
@@ -34,7 +34,8 @@ def mult_inv(a, n):
     multiplicative inverse of a in Z^{*}_{n}.
     """
     ### your code here
-    pass
+    d, x, y = xgcd(a,n)
+    return x % n
 
 ### A tool you may want to use in your code.
 ### it's used in rsa_uts.py.
