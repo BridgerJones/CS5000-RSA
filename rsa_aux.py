@@ -4,8 +4,8 @@
 #############################################################
 # module: rsa_aux.py
 # description: auxiliay functions for RSA
-# YOUR NAME
-# YOUR A-NUMBER
+# YOUR NAME Bridger Jones
+# YOUR A-NUMBER A02314787
 ##############################################################
 
 import numpy as np
@@ -13,12 +13,20 @@ import math
 
 ### Assign 12, subproblem 1.1
 def xgcd(a,b):
-    ''' 
+    '''
     extended gcd that returns d, x, y such that
     d = ax + by.
     '''
     ### your code here
-    pass
+    prevx, x = 1, 0
+    prevy, y = 0, 1
+    aa, bb = a, b
+    while bb != 0:
+        q = aa // bb
+        x, prevx = prevx - q * x, x
+        y, prevy = prevy - q * y, y
+        aa, bb = bb, aa % bb
+    return [aa, prevx, prevy]
 
 ### Assign 12, subproblem 1.2
 def mult_inv(a, n):
@@ -67,6 +75,3 @@ def euler_phi(n):
     """ Euler's Totient """
     ### your code here
     pass
-
-    
-

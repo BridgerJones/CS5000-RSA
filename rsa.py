@@ -4,8 +4,8 @@
 #############################################################
 # module: rsa.py
 # description: RSA
-# YOUR NAME
-# YOUR A-NUMBER
+# YOUR NAME Bridger Jones
+# YOUR A-NUMBER A02314787
 ##############################################################
 
 
@@ -29,13 +29,13 @@ class rsa(object):
         ### your code here
         pass
 
-    ### Assign 12, subproblem 1.7    
+    ### Assign 12, subproblem 1.7
     @staticmethod
     def encrypt(m, pk):
         ### your code here
         pass
 
-    ### Assign 12, subproblem 1.7        
+    ### Assign 12, subproblem 1.7
     @staticmethod
     def decrypt(c, sk):
         ### your code here
@@ -45,14 +45,9 @@ class rsa(object):
     @staticmethod
     def encrypt_text(text, pub_key):
         ### your code here
-
-    ### Assign 12, subproblem 1.8        
-    @staticmethod    
+        pass
+    ### Assign 12, subproblem 1.8
+    @staticmethod
     def decrypt_cryptotexts(cryptotexts, sec_key):
         ### your code here
         pass
-    
-    
-
-
-    
