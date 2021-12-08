@@ -32,9 +32,9 @@ def mult_inv(a, n):
 ### it's used in rsa_uts.py.
 def z_star_sub_n(n):
     """
-    compute the elements of Z^{*}_{n}.
+    compute the elements of Z^{*}_{n}; same as z_star_sub_n_elts.
     """
-    return np.array([i for i in range(n) if xgcd(i, n) == 1])
+    return np.array([i for i in range(n) if xgcd(i, n)[0] == 1])
 
 ### A tool you may want to use in your code (e.g., euler's totient)
 def is_prime(n):
