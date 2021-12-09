@@ -89,8 +89,6 @@ def euler_phi(n):
     for p in primes:
         if n % p == 0:
             divisors.append(p)
-    print("DIVISORS",divisors)
     for p_divisor in divisors:
         n *= (1-1/p_divisor)
-    print("N", n)
-    return n
+    return math.floor(n)
