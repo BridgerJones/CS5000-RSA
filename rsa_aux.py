@@ -84,4 +84,13 @@ def mod_exp(a, b, n):
 def euler_phi(n):
     """ Euler's Totient """
     ### your code here
-    pass
+    primes = find_primes_in_range(0,n)
+    divisors = []
+    for p in primes:
+        if n % p == 0:
+            divisors.append(p)
+    print("DIVISORS",divisors)
+    for p_divisor in divisors:
+        n *= (1-1/p_divisor)
+    print("N", n)
+    return n
