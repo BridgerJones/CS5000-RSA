@@ -48,9 +48,15 @@ class rsa(object):
     @staticmethod
     def encrypt_text(text, pub_key):
         ### your code here
-        pass
+        encrypted_char_list = []
+        for char in text:
+            encrypted_char_list.append(rsa.encrypt(ord(char), pub_key))
+        return encrypted_char_list
     ### Assign 12, subproblem 1.8
     @staticmethod
     def decrypt_cryptotexts(cryptotexts, sec_key):
         ### your code here
-        pass
+        decrypted_string = ""
+        for char in cryptotexts:
+            decrypted_string += chr(rsa.decrypt(char, sec_key))
+        return decrypted_string

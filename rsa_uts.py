@@ -137,71 +137,71 @@ class rsa_uts(unittest.TestCase):
     #     print('test_generate_keys_from_pqe() passed...')
     #
     ### unit test 1 for subproblem 1.7
-    def test_encrypt_decrypt_01(self):
-        print('test_encrypt_decrypt_01() ...')
-        p, q, e = 11, 29, 3
-        epn = euler_phi(p*q)
-        assert epn == (11-1)*(29-1)
-        assert xgcd(epn, 3)[0] == 1
-        pk, sk = rsa.generate_keys_from_pqe(p, q, e)
-        M = 100
-        assert rsa.decrypt(rsa.encrypt(M, pk), sk) == M
-        assert rsa.encrypt(rsa.decrypt(M, sk), pk) == M
-        print('test_encrypt_decrypt_01() passed ...')
+    # def test_encrypt_decrypt_01(self):
+    #     print('test_encrypt_decrypt_01() ...')
+    #     p, q, e = 11, 29, 3
+    #     epn = euler_phi(p*q)
+    #     assert epn == (11-1)*(29-1)
+    #     assert xgcd(epn, 3)[0] == 1
+    #     pk, sk = rsa.generate_keys_from_pqe(p, q, e)
+    #     M = 100
+    #     assert rsa.decrypt(rsa.encrypt(M, pk), sk) == M
+    #     assert rsa.encrypt(rsa.decrypt(M, sk), pk) == M
+    #     print('test_encrypt_decrypt_01() passed ...')
+    #
+    # ### unit test 2 for subproblem 1.7
+    # def test_encrypt_decrypt_02(self):
+    #     print('test_encrypt_decrypt_02() ...')
+    #     nums = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43,
+    #             47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+    #     for p in nums:
+    #         for q in nums:
+    #             if p != q:
+    #                 eu_phi_n = (p-1)*(q-1)
+    #                 if eu_phi_n > 20:
+    #                     e = rsa.choose_e(eu_phi_n)
+    #                     n = p*q
+    #                     M = random.randint(0, n-1)
+    #                     pk, sk = rsa.generate_keys_from_pqe(p, q, e)
+    #                     assert rsa.decrypt(rsa.encrypt(M, pk), sk) == M
+    #                     assert rsa.encrypt(rsa.decrypt(M, sk), pk) == M
+    #     print('test_encrypt_decrypt_02() passed ...')
+    #
+    ### unit test 1 for subproblem 1.8
+    def test_encrypt_decrypt_text_01(self):
+        text = 'Everything is a number.\n\n' + \
+                  '                Pythagoras\n'
+        pub_key = (116209, 415733)
+        sec_key = (231097, 415733)
+        cryptotexts = rsa.encrypt_text(text, pub_key)
+        print('Cryptotexts:\n')
+        print(cryptotexts)
+        decrypted_text = rsa.decrypt_cryptotexts(cryptotexts, sec_key)
+        print('\nOriginal Text:\n')
+        print(text)
+        print('Decrypted Text:\n')
+        print(decrypted_text)
+        assert text == decrypted_text
 
-    ### unit test 2 for subproblem 1.7
-    def test_encrypt_decrypt_02(self):
-        print('test_encrypt_decrypt_02() ...')
-        nums = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43,
-                47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
-        for p in nums:
-            for q in nums:
-                if p != q:
-                    eu_phi_n = (p-1)*(q-1)
-                    if eu_phi_n > 20:
-                        e = rsa.choose_e(eu_phi_n)
-                        n = p*q
-                        M = random.randint(0, n-1)
-                        pk, sk = rsa.generate_keys_from_pqe(p, q, e)
-                        assert rsa.decrypt(rsa.encrypt(M, pk), sk) == M
-                        assert rsa.encrypt(rsa.decrypt(M, sk), pk) == M
-        print('test_encrypt_decrypt_02() passed ...')
-    #
-    # ### unit test 1 for subproblem 1.8
-    # def test_encrypt_decrypt_text_01(self):
-    #     text = 'Everything is a number.\n\n' + \
-    #               '                Pythagoras\n'
-    #     pub_key = (116209, 415733)
-    #     sec_key = (231097, 415733)
-    #     cryptotexts = rsa.encrypt_text(text, pub_key)
-    #     print('Cryptotexts:\n')
-    #     print(cryptotexts)
-    #     decrypted_text = rsa.decrypt_cryptotexts(cryptotexts, sec_key)
-    #     print('\nOriginal Text:\n')
-    #     print(text)
-    #     print('Decrypted Text:\n')
-    #     print(decrypted_text)
-    #     assert text == decrypted_text
-    #
-    # ### unit test 2 for subproblem 1.8
-    # def test_encrypt_decrypt_text_02(self):
-    #     text = 'I am by heritage a Jew, by citizenship a Swiss,\n' + \
-    #            'and by makeup a human being, and only a human being,\n' + \
-    #            'without any special attachment to any state or national\n' + \
-    #            'entity whatsoever.\n' + \
-    #            '\n\n' + \
-    #            '                Albert Einstein\n'
-    #     pub_key = (116209, 415733)
-    #     sec_key = (231097, 415733)
-    #     cryptotexts = rsa.encrypt_text(text, pub_key)
-    #     print('Cryptotexts:\n')
-    #     print(cryptotexts)
-    #     decrypted_text = rsa.decrypt_cryptotexts(cryptotexts, sec_key)
-    #     print('\nOriginal Text:\n')
-    #     print(text)
-    #     print('Decrypted Text:\n')
-    #     print(decrypted_text)
-    #     assert text == decrypted_text
+    ### unit test 2 for subproblem 1.8
+    def test_encrypt_decrypt_text_02(self):
+        text = 'I am by heritage a Jew, by citizenship a Swiss,\n' + \
+               'and by makeup a human being, and only a human being,\n' + \
+               'without any special attachment to any state or national\n' + \
+               'entity whatsoever.\n' + \
+               '\n\n' + \
+               '                Albert Einstein\n'
+        pub_key = (116209, 415733)
+        sec_key = (231097, 415733)
+        cryptotexts = rsa.encrypt_text(text, pub_key)
+        print('Cryptotexts:\n')
+        print(cryptotexts)
+        decrypted_text = rsa.decrypt_cryptotexts(cryptotexts, sec_key)
+        print('\nOriginal Text:\n')
+        print(text)
+        print('Decrypted Text:\n')
+        print(decrypted_text)
+        assert text == decrypted_text
     #
     # ### unit test 1 for subproblem 1.9
     # def test_hack_rsa_01(self):
