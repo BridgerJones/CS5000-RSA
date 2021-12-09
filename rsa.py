@@ -30,7 +30,7 @@ class rsa(object):
     @staticmethod
     def generate_keys_from_pqe(p, q, e):
         ### your code here
-        pass
+        return (e, p*q), (mult_inv(e, euler_phi(p*q)), p*q)
 
     ### Assign 12, subproblem 1.7
     @staticmethod
