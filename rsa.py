@@ -36,13 +36,13 @@ class rsa(object):
     @staticmethod
     def encrypt(m, pk):
         ### your code here
-        pass
+        return (m**pk[0]) % pk[1]
 
     ### Assign 12, subproblem 1.7
     @staticmethod
     def decrypt(c, sk):
         ### your code here
-        pass
+        return (c**sk[0]) % sk[1]
 
     ### Assign 12, subproblem 1.8
     @staticmethod
