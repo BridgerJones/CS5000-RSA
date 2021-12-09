@@ -11,7 +11,7 @@
 
 import numpy as np
 from rsa_aux import xgcd, mod_exp
-from rsa_aux import mult_inv, euler_phi, is_prime
+from rsa_aux import mult_inv, euler_phi, is_prime, find_primes_in_range
 import math
 import random
 
@@ -21,7 +21,10 @@ class rsa(object):
     @staticmethod
     def choose_e(eu_phi_n):
         ### your code here
-        pass
+         primes = find_primes_in_range(11, eu_phi_n - 1)
+         rel_primes = list(filter(lambda x: xgcd(eu_phi_n, x)[0]==1, primes))
+         r_num = random.randint(0, len(rel_primes)-1)
+         return rel_primes[r_num]
 
     ### Assign 12, subproblem 1.6
     @staticmethod
