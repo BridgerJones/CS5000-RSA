@@ -168,90 +168,90 @@ class rsa_uts(unittest.TestCase):
     #     print('test_encrypt_decrypt_02() passed ...')
     #
     ### unit test 1 for subproblem 1.8
-    def test_encrypt_decrypt_text_01(self):
-        text = 'Everything is a number.\n\n' + \
-                  '                Pythagoras\n'
-        pub_key = (116209, 415733)
-        sec_key = (231097, 415733)
-        cryptotexts = rsa.encrypt_text(text, pub_key)
-        print('Cryptotexts:\n')
-        print(cryptotexts)
-        decrypted_text = rsa.decrypt_cryptotexts(cryptotexts, sec_key)
-        print('\nOriginal Text:\n')
-        print(text)
-        print('Decrypted Text:\n')
-        print(decrypted_text)
-        assert text == decrypted_text
+    # def test_encrypt_decrypt_text_01(self):
+    #     text = 'Everything is a number.\n\n' + \
+    #               '                Pythagoras\n'
+    #     pub_key = (116209, 415733)
+    #     sec_key = (231097, 415733)
+    #     cryptotexts = rsa.encrypt_text(text, pub_key)
+    #     print('Cryptotexts:\n')
+    #     print(cryptotexts)
+    #     decrypted_text = rsa.decrypt_cryptotexts(cryptotexts, sec_key)
+    #     print('\nOriginal Text:\n')
+    #     print(text)
+    #     print('Decrypted Text:\n')
+    #     print(decrypted_text)
+    #     assert text == decrypted_text
+    #
+    # ### unit test 2 for subproblem 1.8
+    # def test_encrypt_decrypt_text_02(self):
+    #     text = 'I am by heritage a Jew, by citizenship a Swiss,\n' + \
+    #            'and by makeup a human being, and only a human being,\n' + \
+    #            'without any special attachment to any state or national\n' + \
+    #            'entity whatsoever.\n' + \
+    #            '\n\n' + \
+    #            '                Albert Einstein\n'
+    #     pub_key = (116209, 415733)
+    #     sec_key = (231097, 415733)
+    #     cryptotexts = rsa.encrypt_text(text, pub_key)
+    #     print('Cryptotexts:\n')
+    #     print(cryptotexts)
+    #     decrypted_text = rsa.decrypt_cryptotexts(cryptotexts, sec_key)
+    #     print('\nOriginal Text:\n')
+    #     print(text)
+    #     print('Decrypted Text:\n')
+    #     print(decrypted_text)
+    #     assert text == decrypted_text
+    #
+    ### unit test 1 for subproblem 1.9
+    def test_hack_rsa_01(self):
+        print('\n***** Hacking 2-digit pq...')
+        ## p and q are 2-digit primes
+        p, q, e = 11, 29, 3
+        pk, sk = rsa.generate_keys_from_pqe(p, q, e)
+        M = 100
+        C = rsa.encrypt(M, pk)
+        hacked_sk = hack_rsa.get_sec_key(M, C, pk)
+        assert sk[0] == hacked_sk[0] and sk[1] == hacked_sk[1]
+        print('original key = {}'.format(sk))
+        print('hacked key   = {}'.format(hacked_sk))
+        print('***** Hacking 2-digit pq done...')
 
-    ### unit test 2 for subproblem 1.8
-    def test_encrypt_decrypt_text_02(self):
-        text = 'I am by heritage a Jew, by citizenship a Swiss,\n' + \
-               'and by makeup a human being, and only a human being,\n' + \
-               'without any special attachment to any state or national\n' + \
-               'entity whatsoever.\n' + \
-               '\n\n' + \
-               '                Albert Einstein\n'
-        pub_key = (116209, 415733)
-        sec_key = (231097, 415733)
-        cryptotexts = rsa.encrypt_text(text, pub_key)
-        print('Cryptotexts:\n')
-        print(cryptotexts)
-        decrypted_text = rsa.decrypt_cryptotexts(cryptotexts, sec_key)
-        print('\nOriginal Text:\n')
-        print(text)
-        print('Decrypted Text:\n')
-        print(decrypted_text)
-        assert text == decrypted_text
-    #
-    # ### unit test 1 for subproblem 1.9
-    # def test_hack_rsa_01(self):
-    #     print('\n***** Hacking 2-digit pq...')
-    #     ## p and q are 2-digit primes
-    #     p, q, e = 11, 29, 3
-    #     pk, sk = rsa.generate_keys_from_pqe(p, q, e)
-    #     M = 100
-    #     C = rsa.encrypt(M, pk)
-    #     hacked_sk = hack_rsa.get_sec_key(M, C, pk)
-    #     assert sk[0] == hacked_sk[0] and sk[1] == hacked_sk[1]
-    #     print('original key = {}'.format(sk))
-    #     print('hacked key   = {}'.format(hacked_sk))
-    #     print('***** Hacking 2-digit pq done...')
-    #
-    # ### unit test 2 for subproblem 1.9
-    # def test_hack_rsa_02(self):
-    #     print('\n***** Hacking 3-digit pq...')
-    #     ## p and q are 3-digit primes
-    #     p, q = 397, 883
-    #     epn = euler_phi(p*q)
-    #     e = rsa.choose_e(epn)
-    #     pk, sk = rsa.generate_keys_from_pqe(p, q, e)
-    #     print('pk = {}'.format(pk))
-    #     print('sk = {}'.format(sk))
-    #     M = 100
-    #     C = rsa.encrypt(M, pk)
-    #     hacked_sk = hack_rsa.get_sec_key(M, C, pk)
-    #     assert sk[0] == hacked_sk[0] and sk[1] == hacked_sk[1]
-    #     print('original sk = {}'.format(sk))
-    #     print('hacked   sk = {}'.format(hacked_sk))
-    #     print('***** Hacking 3-digit pq done...')
-    #
-    # ### unit test 3 for subproblem 1.9
-    # def test_hack_rsa_03(self):
-    #     print('\n***** Hacking 4-digit pq...')
-    #     ## p and q are 4-digit primes
-    #     p, q = 8629, 9973
-    #     epn = euler_phi(p*q)
-    #     e = rsa.choose_e(epn)
-    #     pk, sk = rsa.generate_keys_from_pqe(p, q, e)
-    #     print('pk = {}'.format(pk))
-    #     print('sk = {}'.format(sk))
-    #     M = 100
-    #     C = rsa.encrypt(M, pk)
-    #     hacked_sk = hack_rsa.get_sec_key(M, C, pk)
-    #     assert sk[0] == hacked_sk[0] and sk[1] == hacked_sk[1]
-    #     print('original sk = {}'.format(sk))
-    #     print('hacked   sk = {}'.format(hacked_sk))
-    #     print('***** Hacking 4-digit pq done...')
+    ### unit test 2 for subproblem 1.9
+    def test_hack_rsa_02(self):
+        print('\n***** Hacking 3-digit pq...')
+        ## p and q are 3-digit primes
+        p, q = 397, 883
+        epn = euler_phi(p*q)
+        e = rsa.choose_e(epn)
+        pk, sk = rsa.generate_keys_from_pqe(p, q, e)
+        print('pk = {}'.format(pk))
+        print('sk = {}'.format(sk))
+        M = 100
+        C = rsa.encrypt(M, pk)
+        hacked_sk = hack_rsa.get_sec_key(M, C, pk)
+        assert sk[0] == hacked_sk[0] and sk[1] == hacked_sk[1]
+        print('original sk = {}'.format(sk))
+        print('hacked   sk = {}'.format(hacked_sk))
+        print('***** Hacking 3-digit pq done...')
+
+    ### unit test 3 for subproblem 1.9
+    def test_hack_rsa_03(self):
+        print('\n***** Hacking 4-digit pq...')
+        ## p and q are 4-digit primes
+        p, q = 8629, 9973
+        epn = euler_phi(p*q)
+        e = rsa.choose_e(epn)
+        pk, sk = rsa.generate_keys_from_pqe(p, q, e)
+        print('pk = {}'.format(pk))
+        print('sk = {}'.format(sk))
+        M = 100
+        C = rsa.encrypt(M, pk)
+        hacked_sk = hack_rsa.get_sec_key(M, C, pk)
+        assert sk[0] == hacked_sk[0] and sk[1] == hacked_sk[1]
+        print('original sk = {}'.format(sk))
+        print('hacked   sk = {}'.format(hacked_sk))
+        print('***** Hacking 4-digit pq done...')
 
     def runTest(self):
         pass
