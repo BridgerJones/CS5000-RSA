@@ -5,8 +5,8 @@
 # module: hack_rsa.py
 # description: obtaining RSA's secrete key from messages,
 # cryptotexts, and public keys.
-# YOUR NAME
-# YOUR A-NUMBER
+# YOUR NAME Bridger Jones
+# YOUR A-NUMBER A02314787
 #############################################################
 
 import math
